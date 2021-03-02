@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row pt-5">
+        
+        <div class="col-md-3">
+           <%= render 'users/info', user: @book.user %>
+                <p>
+                    <%= link_to edit_user_path(@book.user_id),class:"text-white btn btn-block btn-primary" do %>
+                        <i class="fas fa-user-cog"></i>
+                    <% end %>
+                </p>
+            <div class="pt-4">
+            <%= render 'books/form', book: @book_new %>
+            </div>
+        </div>
+        
+        <div class="col-md-8 offset-md-1">
+            <P class="notice"><%= notice %></P>
+            <h1>Book detail</h1>
+            <table class="table border">
+                <tr>
+                    <th class="flex-column" width="10%">
+                        <%= attachment_image_tag @book.user, :profile_image, :fill, 20, 20, format: 'jpeg', fallback: "no_image.jpg",size: '50x50', class:"d-block" %>
+                        <%= link_to user_path(@book.user.id), class:"d-block" do %>
+                            <%= @book.user.name %>
+                        <% end %>
+                    </th>
+                    <th class="bg-primary" width="10%">title</th>
+                    <td>
+                        <%= link_to book_path(@book) do %>
+                            <%= @book.title %>
+                        <% end %>
+                    </td>
+                </tr>
+                <tr height="300">
+                    <td></td>
+                    <div>
+                        <th class="bg-primary">body</th>
+                        <td><%= @book.body %></td>
+                    </div>
+                </tr>
+            </table>
+
+            <div class="justify-content-center">
+                <% if @book.user == current_user %>
+                    <%= link_to "Edit", edit_book_path(@book), class:"btn btn-block btn-primary" %>
+                    <%= link_to "Destroy", book_path(@book), method: :delete, class:"btn btn-block btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+        
+    </div>
+</div>

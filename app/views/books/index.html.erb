@@ -1,0 +1,39 @@
+<%= link_to "about", page_path('about'), class:"text-white" %>
+<div class="container">
+    <div class="row pt-5">
+        <div class="col-md-3">
+            <P class="notice"><%= notice %></P>
+            <h2>User Info</h2>
+            <%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+            <table class="table">
+                <tr>
+                    <th>name</th>
+                    <td><%= current_user.name %></td>
+                </tr>
+                <tr>
+                    <th>introduction</th>
+                    <td><%= current_user.introduction %></td>
+                </tr>
+            </table>
+            <p>
+                <%= link_to edit_user_path(current_user),class:"text-white btn btn-block btn-primary" do %>
+                    <i class="fas fa-user-cog"></i>
+                <% end %>
+            </p>
+                
+            <div class="text-danger">
+                <% if @book.errors.any? %>
+                    <%= @book.errors.count %>errors prohibited this obj from being saved:<br />
+                    <% @book.errors.full_messages.each do |message| %>
+                        <%= message %><br />
+                    <% end %>
+                <% end %>
+            </div>
+            <%= render 'books/form', book: @book %>
+        </div>
+        
+         <div class="col-md-8 offset-md-1">
+            <%= render 'books/list', books: @books %>
+        </div>
+    </div>
+</div>
